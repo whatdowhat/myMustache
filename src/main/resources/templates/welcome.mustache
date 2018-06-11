@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<script src="/webjars/jquery/3.2.1/dist/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/> 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script> 
+</head>
+<body>
+
+<script> 
+    $(document).ready(function(){ 
+     
+    		  
+		var columns = ["ID","USERNAME","AGE","DEPARTNAME"];
+		
+		var table = $('#userTable').dataTable({ 
+	              
+
+	            
+	        	  pageLength: 3,
+	              pagingType : "full_numbers",
+	              bPaginate: true,
+	              bLengthChange: true,
+	              lengthMenu : [ [ 1, 3, 5, 10], [ 1, 3, 5, 10] ],
+	              responsive: false,
+	              bAutoWidth: false,
+	              processing: false,
+	              ordering: true,
+	              bServerSide: true,
+	              searching: true,
+	              sAjaxSource : "/dataTable/myAjaxTable4",
+	              sServerMethod: "POST",
+	              columns : [
+	                  {data: "id"},
+	                  {data: "userName"},
+	                  {data: "age"},
+	                  {data: "departName"}
+	              ],
+	              
+	
+	              columnDefs: [
+	                  {
+	                     targets: [0,1,2,3],
+	                     className: 'dt-body-center'
+	                  }
+	               ],
+
+
+
+	
+	  
+		}); 
+	          
+
+	    // DataTable
+	    var table = $('#userTable').DataTable();
+	  
+	    $('#searchNameBtn').on( 'click', function () {
+	    	
+	        table.search($('#searchName').val()).draw();
+	        
+	    } );
+	  
+
+	  $('#userTable_filter').remove();
+
+	  
+    });           
+    </script>
+ 
+</head>
+<body>
+
+{{>header}}
+
+<input type="input" id="searchName"><input type="button" id="searchNameBtn" value="search"> 
+
+<table id="userTable" class="table table-striped table-bordered table-hover" > 
+    <thead> 
+        <tr> 
+            <th>id</th> 
+            <th>userName</th> 
+            <th>age</th>
+            <th>departName</th> 
+
+        </tr> 
+    </thead> 
+
+</table> 
+
+</body>
+</html>
